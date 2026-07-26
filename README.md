@@ -61,7 +61,7 @@ IMPORTANT: Replace `YOUR_API_KEY` in `background.js` with your own Groq API key.
 ## Development Notes
 
 Built with vanilla JavaScript, HTML, and CSS.
-Uses Chrome's storage.local API for saving preferences.
-Uses the Web Speech API (speechSynthesis) for text-to-speech.
-No external dependencies required.
 
+Uses Chrome’s storage.local API for saving preferences and the Web Speech API (speechSynthesis) for text‑to‑speech.
+
+Requires an API key (not included in this repository).
