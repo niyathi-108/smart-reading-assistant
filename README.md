@@ -44,7 +44,7 @@ A lightweight Chrome extension that adds accessibility features and text-process
 -icons/               -Extension icons
 
 ## Configuration
-Replace `YOUR_API_KEY` in `background.js` with your own Groq API key.
+IMPORTANT: Replace `YOUR_API_KEY` in `background.js` with your own Groq API key.
 
 ## Usage
 
