@@ -24,11 +24,15 @@ A lightweight Chrome extension that adds accessibility features and text-process
 1. Clone this repository:
    ```bash
    git clone https://github.com/your-username/chrome-sidepanel-extension.git
-2. Open Chrome and go to: 
--Code
+   
+2. Open Chrome and go to:
+   
 -chrome://extensions/
+
 -Enable Developer mode (toggle in the top right).
+
 -Click Load unpacked and select the project folder.
+
 -The extension will now appear in your browser's extensions list.
 
 ## Project Structure
