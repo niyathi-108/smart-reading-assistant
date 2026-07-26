@@ -64,4 +64,6 @@ Built with vanilla JavaScript, HTML, and CSS.
 
 Uses Chrome’s storage.local API for saving preferences and the Web Speech API (speechSynthesis) for text‑to‑speech.
 
+Integrates with the Groq API for advanced text processing.
+
 Requires an API key (not included in this repository).
