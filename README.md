@@ -5,9 +5,9 @@ A lightweight Chrome extension that adds accessibility features and text-process
 ## Features
 
 - **Read Aloud** with Pause, Resume, and Stop controls
-- 
+  
 - **Text actions**: define, summarize, expand, simplify, synonyms, analogy, step-by-step breakdown
-- 
+
 - **Accessibility options**:
   - Large font
     
