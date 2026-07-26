@@ -24,8 +24,7 @@ A lightweight Chrome extension that adds accessibility features and text-process
 -chrome://extensions/
 -Enable Developer mode (toggle in the top right).
 -Click Load unpacked and select the project folder.
-
-The extension will now appear in your browser's extensions list.
+-The extension will now appear in your browser's extensions list.
 
 ## Project Structure
 Code
@@ -41,15 +40,15 @@ Replace `YOUR_API_KEY` in `background.js` with your own Groq API key.
 
 ## Usage
 
-Select text on any webpage.
+-Select text on any webpage.
 
-Open the extension side panel.
+-Open the extension side panel.
 
-Choose an action (define, summarize, expand, simplify, synonyms, analogy, steps).
+-Choose an action (define, summarize, expand, simplify, synonyms, analogy, steps).
 
-Use the Read Aloud button to listen to the output.
+-Use the Read Aloud button to listen to the output.
 
-Adjust accessibility toggles to customize the text display.
+-Adjust accessibility toggles to customize the text display.
 
 ## Development Notes
 
