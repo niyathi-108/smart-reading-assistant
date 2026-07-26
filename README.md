@@ -5,11 +5,16 @@ A lightweight Chrome extension that adds accessibility features and text-process
 ## Features
 
 - **Read Aloud** with Pause, Resume, and Stop controls
+- 
 - **Text actions**: define, summarize, expand, simplify, synonyms, analogy, step-by-step breakdown
+- 
 - **Accessibility options**:
   - Large font
+    
   - High contrast
+    
   - Dyslexia-friendly font
+    
   - Extra spacing
 
 ---
@@ -27,10 +32,15 @@ A lightweight Chrome extension that adds accessibility features and text-process
 -The extension will now appear in your browser's extensions list.
 
 ## Project Structure
+
 -manifest.json        -Extension manifest
+
 -sidepanel.html       -Side panel UI
+
 -sidepanel.js         -Side panel logic
+
 -background.js        -Background script 
+
 -icons/               -Extension icons
 
 ## Configuration
