@@ -27,13 +27,11 @@ A lightweight Chrome extension that adds accessibility features and text-process
 -The extension will now appear in your browser's extensions list.
 
 ## Project Structure
-Code
-chrome-sidepanel-extension/
--manifest.json        # Extension manifest
--sidepanel.html       # Side panel UI
--sidepanel.js         # Side panel logic
--background.js        # Background script 
--icons/               # Extension icons
+-manifest.json        -Extension manifest
+-sidepanel.html       -Side panel UI
+-sidepanel.js         -Side panel logic
+-background.js        -Background script 
+-icons/               -Extension icons
 
 ## Configuration
 Replace `YOUR_API_KEY` in `background.js` with your own Groq API key.
