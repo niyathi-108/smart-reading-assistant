@@ -27,13 +27,13 @@ A lightweight Chrome extension that adds accessibility features and text-process
    
 2. Open Chrome and go to:
    
--chrome://extensions/
+ -chrome://extensions/
 
--Enable Developer mode (toggle in the top right).
+ -Enable Developer mode (toggle in the top right).
 
--Click Load unpacked and select the project folder.
+ -Click Load unpacked and select the project folder.
 
--The extension will now appear in your browser's extensions list.
+ -The extension will now appear in your browser's extensions list.
 
 ## Project Structure
 
