@@ -1,12 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
   let lastSelectedText = "";
 
+  // Helpers
   function underlineImportantWords(text) {
-    return text.replace(/\*\*(.*?)\*\*/g, "<u>$1</u>");
+    return text.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
+  }
+  function convertHeadings(text) {
+    return text.replace(/^#{1,6}\s*(.*)$/gm, "<h3>$1</h3>");
+  }
+  function convertBulletsToList(text) {
+    return text.replace(/^\*\s*(.*)$/gm, "<ul><li>$1</li></ul>");
   }
 
   const output = document.getElementById("output");
 
+  // Preferences
   chrome.storage.local.get(
     ["largeFont", "highContrast", "dyslexiaFont", "extraSpacing"],
     (prefs) => {
@@ -29,6 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
+  // Toggle controls
   document.getElementById("largeFont").addEventListener("change", (e) => {
     output.classList.toggle("large-font", e.target.checked);
     chrome.storage.local.set({ largeFont: e.target.checked });
@@ -46,6 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     chrome.storage.local.set({ extraSpacing: e.target.checked });
   });
 
+  // Read aloud
   const readAloudBtn = document.getElementById("readAloudBtn");
   const stopBtn = document.getElementById("stopReadBtn");
   let isReading = false;
@@ -65,14 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
             isReading = false;
             isPaused = false;
             readAloudBtn.textContent = "Read Aloud";
-            stopBtn.style.display = "none"; 
+            stopBtn.style.display = "none";
           };
 
           speechSynthesis.speak(currentUtterance);
           isReading = true;
           isPaused = false;
           readAloudBtn.textContent = "Pause Reading";
-          stopBtn.style.display = "inline-block"; 
+          stopBtn.style.display = "inline-block";
         }
       } else if (isReading && !isPaused) {
         speechSynthesis.pause();
@@ -93,11 +103,12 @@ document.addEventListener("DOMContentLoaded", () => {
         isReading = false;
         isPaused = false;
         readAloudBtn.textContent = "Read Aloud";
-        stopBtn.style.display = "none"; 
+        stopBtn.style.display = "none";
       }
     });
   }
 
+  // Listen for selected text
   chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === "TEXT_SELECTED") {
       lastSelectedText = msg.payload;
@@ -105,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Run button
   const runBtn = document.getElementById("runBtn");
   if (runBtn) {
     runBtn.onclick = () => {
@@ -122,37 +134,62 @@ document.addEventListener("DOMContentLoaded", () => {
         (response) => {
           if (response && response.result) {
             let formatted = underlineImportantWords(response.result);
+            formatted = convertHeadings(formatted);
+            formatted = convertBulletsToList(formatted);
 
             switch (action) {
               case "define":
-                formatted = `<strong>Definition:</strong><br><br>${formatted}`;
+                formatted = `<h3>Definition:</h3><br><br>${formatted}`;
                 break;
               case "summarize":
-                formatted = `<strong>Summary:</strong><br><br>${formatted}`;
+                formatted = `<h3>Summary:</h3><br><br>${formatted}`;
                 break;
               case "expand":
-                formatted = `<strong>Expanded Text:</strong><br><br>${formatted}`;
+                formatted = `<h3>Expanded Text:</h3><br><br>${formatted}`;
                 break;
               case "synonyms":
-                formatted = `<strong>Synonyms:</strong><br><br>${formatted}`;
+                formatted = `<h3>Synonyms:</h3><br><br>${formatted}`;
                 break;
               case "simplify":
-                formatted = `<strong>Simplified Version:</strong><br><br>${formatted}`;
+                formatted = `<h3>Simplified Version:</h3><br><br>${formatted}`;
                 break;
               case "analogy":
-                formatted = `<strong>Analogy Helper:</strong><br><br>${formatted}`;
+                formatted = `<h3>Analogy Helper:</h3><br><br>${formatted}`;
                 break;
-              case "steps":
-                const steps = formatted.split(/\n+/).filter(line => line.trim() !== "");
-                formatted = "<strong>Step-by-Step Breakdown:</strong><br><br><ol>";
-                steps.forEach(step => {
-                  formatted += `<li>${step}</li>`;
+              case "steps": {
+                const lines = formatted.split(/\n+/).filter(line => line.trim() !== "");
+                formatted = "<h3>Step-by-Step Breakdown:</h3><br><br><ol>";
+
+                lines.forEach(line => {
+                  const trimmed = line.trim();
+                  if (/^\d+\./.test(trimmed)) {
+                    // Proper numbered steps
+                    formatted += `<li>${trimmed.replace(/^\d+\.\s*/, "")}</li>`;
+                  } else if (/^\*/.test(trimmed)) {
+                    // Bullets
+                    formatted += `<ul><li>${trimmed.replace(/^\*\s*/, "")}</li></ul>`;
+                  } else {
+                    // Explanatory text
+                    formatted += `<p>${trimmed}</p>`;
+                  }
                 });
+
                 formatted += "</ol>";
                 break;
+              }
             }
 
             output.innerHTML = formatted;
+
+            if (typeof renderMathInElement === "function") {
+              renderMathInElement(output, {
+                delimiters: [
+                  { left: "$$", right: "$$", display: true },
+                  { left: "\\[", right: "\\]", display: true },
+                  { left: "\\(", right: "\\)", display: false }
+                ]
+              });
+            }
           } else {
             output.textContent = "Error: No response from background.";
           }
