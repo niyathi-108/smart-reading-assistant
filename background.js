@@ -22,9 +22,9 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     } else if (action === "simplify") {
      prompt = `Explain the text as if I am 5 with very easy words. Use points and align to left.:\n\n${text}`;
     } else if (action === "analogy") {
-     prompt = `Explain the following text using everyday analogies.:\n\n${text}`;
+     prompt = `Explain the following text using everyday analogies. Align text to the left.\n\n${text}`;
     } else if (action === "steps") {
-     prompt = `Break down the following text into clear step-by-step instructions. Make it short and simple.:\n\n${text}`;
+     prompt = `Write a step-by-step explanation with numbered steps only for the main headings. No bullets or numbering for sub text. Align to the left.\n\n${text}`;
 }
 
     fetch(GROQ_ENDPOINT, {
