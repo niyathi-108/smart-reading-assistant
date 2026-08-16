@@ -14,7 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const output = document.getElementById("output");
 
-  // Preferences
   chrome.storage.local.get(
     ["largeFont", "highContrast", "dyslexiaFont", "extraSpacing"],
     (prefs) => {
@@ -37,7 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   );
 
-  // Toggle controls
   document.getElementById("largeFont").addEventListener("change", (e) => {
     output.classList.toggle("large-font", e.target.checked);
     chrome.storage.local.set({ largeFont: e.target.checked });
@@ -55,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     chrome.storage.local.set({ extraSpacing: e.target.checked });
   });
 
-  // Read aloud
   const readAloudBtn = document.getElementById("readAloudBtn");
   const stopBtn = document.getElementById("stopReadBtn");
   let isReading = false;
@@ -108,7 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Listen for selected text
   chrome.runtime.onMessage.addListener((msg) => {
     if (msg.type === "TEXT_SELECTED") {
       lastSelectedText = msg.payload;
@@ -116,7 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Run button
   const runBtn = document.getElementById("runBtn");
   if (runBtn) {
     runBtn.onclick = () => {
