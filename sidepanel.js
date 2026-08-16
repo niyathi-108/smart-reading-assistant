@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   let lastSelectedText = "";
 
-  // Helpers
   function underlineImportantWords(text) {
     return text.replace(/\*\*(.*?)\*\*/g, "<b>$1</b>");
   }
